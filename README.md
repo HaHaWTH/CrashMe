@@ -13,9 +13,12 @@
     - [崩溃](./server/crash-bukkit.md)
     - [报错](./server/error-bukkit.md)
   - MOD服(通用)
-    - 崩溃
+    - [崩溃](./server/crash-mod-common.md)
     - 报错
 - 客户端
+  - MOD端
+    - 通用
+      - [崩溃](./client/crash-mod-common.md)
 
 ## 📢 声明
 
