@@ -38,3 +38,9 @@ lambda$init$13里的lambda代表lambda表达式，也就是上面的那个->符�
 ItemBlock?
 当然，看是一回事，自己动手做又是一回事，绝大多数人连看都看不到这里，如果你不会开发，还是老老实实的向作者发
 issue报告问题吧
+
+## 实战1. 渲染MOD冲突
+
+这里有一份[崩溃报告](https://paste.gg/p/anonymous/6f20014a06a64e9a86b415db01faa58c), 通过之前的练习我们可以得知, 这是由于Mixin注入冲突导致的崩溃, 位于Render Thread, 也就是渲染线程, 往下看到Mod列表时可以发现, 原先的Rubidium不见了, 只剩下一个Embeddium。这两个模组同为Sodium的Forge移植版, 两个都装自然会导致崩溃
+
+解决方案: 删除Rubidium和Embeddium中任意一个
