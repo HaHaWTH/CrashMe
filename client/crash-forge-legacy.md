@@ -33,7 +33,7 @@
 
 这时我们可以结合[暮色的源代码](https://github.com/TeamTwilight/twilightforest/blob/1.11.2/src/main/java/twilightforest/block/ColorHandler.java#L266)来分析
 
-lambda$init$13里的lambda代表lambda表达式，也就是上面的那个->符号，结台ItemBlock，我们可以看到问题的原因在于
+lambda$init$13里的lambda代表lambda表达式，也就是上面的那个->符号，结合ItemBlock，我们可以看到问题的原因在于
 ——如果玩家的物品栏什么都没有，那么stack(Itemstack)应该是空的，根本不能从stack获取到Item，还转什么
 ItemBlock?
 当然，看是一回事，自己动手做又是一回事，绝大多数人连看都看不到这里，如果你不会开发，还是老老实实的向作者发
