@@ -19,6 +19,8 @@
   - MOD端
     - 通用
       - [崩溃](./client/crash-mod-common.md)
+    - Forge
+      - [崩溃](./client/crash-forge-legacy.md)
 
 ## 📢 声明
 
