@@ -37,3 +37,30 @@ org.spongepowered.asm.mixin.injection.throwables.InvalidInjectionException: @At(
 解决方案：
 
 删除掉其中任意一个模组
+
+## 案例1: Mixin的侵入式修改导致崩溃
+
+在本案例中, 服务端软件为**CatServer 1.16.5**, 混合端通常不会受到模组作者的支持, 因此使用风险请自行承担
+
+崩溃日志: [点击前往](https://paste.gg/p/anonymous/fea245eca0e644d09865284281685006)
+
+首先来到第5行, 看到`Exception in server tick loop`, 这表明服务器在进行tick循环时出现了错误. 第7行指明了是在生成新区块时产生的异常, 为什么呢? 让我们继续往下看: 
+```
+Caused by: java.lang.NullPointerException: Cannot store to object array because "this.field_227054_f_" is null
+```
+
+这段表明了一切问题的来源都是因为这个空指针异常, 这个field(字段)是什么在这里并不重要, 接着往下看第一行at:
+
+```
+at net.minecraft.world.biome.BiomeContainer.setBiome(BiomeContainer.java:110) ~[?:?] {re:mixin,pl:runtimedistcleaner:A,re:classloading,pl:mixin:APP:modernfix-common.mixins.json:perf.compress_biome_container.MixinBiomeContainer,pl:mixin:A,pl:runtimedistcleaner:}
+```
+
+有没有注意到什么? 没注意到也没关系, 大括号内的mixin中出现了`modernfix`. 到这基本就可以确定是ModernFix中的mixin引起的崩溃了.
+
+通过对照混淆映射表可以得知, `field_227054_f_`的真面目是
+
+```java
+private final Biome[] biomes; // Mojang mapping
+```
+
+移除ModernFix后, 成功解决了问题
